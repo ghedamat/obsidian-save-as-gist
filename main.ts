@@ -21,7 +21,6 @@ export default class SaveAsGist extends Plugin {
 			id: 'save-as-new-gist',
 			name: 'Save current file as a new private Gist',
 			callback: async () => {
-				//new SampleModal(this.app).open();
 				const noteFile = this.app.workspace.getActiveFile(); // Currently Open Note
 				const fileName = noteFile.name;
 				if (!fileName) {
