@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-save-as-gist",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "saving current note as a gist",
 	"main": "main.js",
 	"scripts": {
