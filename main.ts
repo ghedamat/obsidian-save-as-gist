@@ -20,15 +20,15 @@ export default class SaveAsGist extends Plugin {
 		this.addCommand({
 			id: 'save-as-new-gist',
 			name: 'Save current file as a new private Gist',
-			callback: async () => {
-				const noteFile = this.app.workspace.getActiveFile(); // Currently Open Note
+			editorCallback: async (editor: Editor, view: MarkdownView) => {
+				const noteFile = view.file; // Currently Open Note
 				const fileName = noteFile.name;
 				if (!fileName) {
 					return; // Nothing Open
 				}
 
 				// Read the currently open note file.
-				let body = await this.app.vault.read(noteFile);
+				const body = editor.getValue();
 
 				await this._saveAsGist(fileName, body);
 			}
@@ -37,15 +37,15 @@ export default class SaveAsGist extends Plugin {
 		this.addCommand({
 			id: 'save-as-new-gist-selection',
 			name: 'Save current selection as a new private Gist',
-			editorCallback: (editor: Editor, _view: MarkdownView) => {
-				const noteFile = this.app.workspace.getActiveFile(); // Currently Open Note
+			editorCallback: async (editor: Editor, view: MarkdownView) => {
+				const noteFile = view.file; // Currently Open Note
 				const fileName = noteFile.name;
 				if (!fileName) {
 					return; // Nothing Open
 				}
 				const body = editor.getSelection();
 
-				this._saveAsGist(fileName, body);
+				await this._saveAsGist(fileName, body);
 			}
 		});
 
